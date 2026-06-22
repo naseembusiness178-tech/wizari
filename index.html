@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وزاري / وەزاری</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#003D6B;
+  --primary-light:#005C9E;
+  --primary-dark:#002845;
+  --gold:#D4A017;
+  --gold-light:#F0C040;
+  --bg:#F8F9FC;
+  --card:#FFFFFF;
+  --text:#1A1A2E;
+  --text-muted:#6B7280;
+  --success:#10B981;
+  --error:#EF4444;
+  --radius:16px;
+  --shadow:0 4px 24px rgba(0,61,107,0.08);
+  --shadow-hover:0 8px 40px rgba(0,61,107,0.15);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans Arabic','Vazirmatn','Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.ltr{direction:ltr;font-family:'Inter',sans-serif}
+
+/* ── Lang toggle ── */
+.lang-bar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 24px;
+  background:rgba(0,61,107,0.95);
+  backdrop-filter:blur(8px);
+  color:#fff;
+  font-size:0.85rem;
+}
+.lang-bar .brand{display:flex;align-items:center}
+.brand-logo{
+  height:36px;
+  width:auto;
+  border-radius:6px;
+  display:block;
+}
+.lang-toggle{
+  display:flex;gap:4px;
+  background:rgba(255,255,255,0.1);
+  border-radius:30px;
+  padding:3px;
+}
+.lang-btn{
+  padding:6px 16px;border-radius:20px;
+  border:none;cursor:pointer;font-weight:700;font-size:0.8rem;
+  font-family:inherit;
+  transition:all 0.3s;
+  background:transparent;
+  color:rgba(255,255,255,0.6);
+}
+.lang-btn.active{background:var(--gold);color:var(--primary-dark)}
+
+/* ── Header / Hero ── */
+header{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+  color:#fff;
+  padding:0;
+  position:relative;
+  overflow:hidden;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  margin-top:40px;
+}
+header::before{
+  content:'';
+  position:absolute;
+  top:-50%;right:-30%;
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(212,160,23,0.15) 0%,transparent 70%);
+  border-radius:50%;
+}
+header::after{
+  content:'';
+  position:absolute;
+  bottom:-30%;left:-20%;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(255,255,255,0.05) 0%,transparent 70%);
+  border-radius:50%;
+}
+.hero-content{
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto;
+  padding:60px 40px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  width:100%;
+}
+.hero-left h1{
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  font-weight:900;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.hero-left h1 .gold{color:var(--gold)}
+.hero-left .subtitle{
+  font-size:clamp(1rem,2vw,1.4rem);
+  opacity:0.9;
+  margin-bottom:24px;
+  font-weight:400;
+}
+.hero-left .desc{
+  font-size:1.05rem;
+  opacity:0.85;
+  line-height:1.8;
+  margin-bottom:35px;
+  max-width:500px;
+}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;
+  border-radius:50px;
+  font-family:inherit;
+  font-size:1rem;font-weight:700;
+  cursor:pointer;text-decoration:none;
+  transition:all 0.3s ease;
+  border:none;
+}
+.btn-primary{
+  background:var(--gold);
+  color:var(--primary-dark);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,160,23,0.4)}
+.btn-outline{
+  background:transparent;
+  color:#fff;
+  border:2px solid rgba(255,255,255,0.3);
+}
+.btn-outline:hover{border-color:#fff;transform:translateY(-2px)}
+
+/* Hero Illustration */
+.hero-illustration{display:flex;align-items:center;justify-content:center}
+.hero-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.stat-card{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;
+  padding:24px 20px;
+  text-align:center;
+  color:#fff;
+  font-size:1.5rem;
+  font-weight:800;
+  backdrop-filter:blur(4px);
+  transition:all 0.3s;
+}
+.stat-card:hover{transform:translateY(-4px);background:rgba(255,255,255,0.12)}
+.stat-card small{display:block;font-size:0.75rem;font-weight:400;opacity:0.7;margin-top:4px}
+
+/* Sections */
+section{padding:80px 20px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-title{
+  text-align:center;
+  font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:800;
+  color:var(--primary);
+  margin-bottom:10px;
+}
+.section-subtitle{
+  text-align:center;
+  color:var(--text-muted);
+  font-size:1.05rem;
+  margin-bottom:50px;
+}
+
+/* Demo */
+#demo{background:#fff}
+.demo-container{
+  max-width:900px;margin:0 auto;
+  background:var(--bg);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.demo-tabs{
+  display:flex;background:var(--primary);flex-wrap:wrap;
+}
+.demo-tab{
+  flex:1;padding:16px 20px;
+  text-align:center;
+  font-weight:700;font-size:0.95rem;
+  color:rgba(255,255,255,0.6);
+  cursor:pointer;
+  transition:all 0.3s;
+  border:none;background:none;
+  font-family:inherit;
+}
+.demo-tab:hover{color:rgba(255,255,255,0.9)}
+.demo-tab.active{color:#fff;background:rgba(255,255,255,0.1);border-bottom:3px solid var(--gold)}
+.demo-panel{display:none;padding:30px}
+.demo-panel.active{display:block}
+
+/* Subject grid */
+.subject-demo-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;
+  margin-bottom:20px;
+}
+.subject-demo-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:18px 12px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  transition:all 0.3s;
+  border:2px solid transparent;
+}
+.subject-demo-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.subject-demo-card.selected{border-color:var(--gold);background:#FFF8E1}
+.subject-demo-card .s-icon{font-size:32px;margin-bottom:6px}
+.subject-demo-card .s-name{font-weight:700;font-size:0.9rem}
+.subject-demo-card .s-name-en{font-size:0.75rem;color:var(--text-muted);font-weight:400;font-family:'Inter',sans-serif;direction:ltr}
+
+/* Year chips */
+.year-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.year-chip{
+  padding:10px 22px;border-radius:30px;
+  background:var(--card);border:2px solid #E5E7EB;
+  font-weight:600;font-size:0.95rem;
+  cursor:pointer;transition:all 0.3s;
+  font-family:inherit;
+}
+.year-chip:hover{border-color:var(--primary)}
+.year-chip.selected{background:var(--primary);color:#fff;border-color:var(--primary)}
+.year-chip .sessions{font-size:0.75rem;font-weight:400;color:var(--text-muted);display:block}
+.year-chip.selected .sessions{color:rgba(255,255,255,0.7)}
+
+.session-select{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.session-btn{
+  padding:8px 18px;border-radius:20px;
+  background:var(--card);border:1px solid #E5E7EB;
+  font-weight:600;font-size:0.85rem;
+  cursor:pointer;transition:all 0.3s;
+  font-family:inherit;
+}
+.session-btn:hover{border-color:var(--primary)}
+.session-btn.selected{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* Q viewer */
+.question-area{
+  background:var(--card);
+  border-radius:12px;
+  padding:24px;
+  min-height:180px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  margin-top:16px;
+}
+.question-area .q-meta{
+  display:flex;justify-content:space-between;
+  font-size:0.8rem;color:var(--text-muted);
+  margin-bottom:10px;
+}
+.question-area .q-text{font-size:1.1rem;font-weight:600;margin-bottom:16px;line-height:1.7}
+.q-options{display:flex;flex-direction:column;gap:8px}
+.q-option{
+  padding:12px 16px;border-radius:10px;
+  border:2px solid #E5E7EB;
+  cursor:pointer;transition:all 0.2s;
+  font-weight:500;font-size:0.95rem;
+  font-family:inherit;
+}
+.q-option:hover{border-color:var(--primary)}
+.q-option.correct{border-color:var(--success);background:#ECFDF5;color:#065F46}
+.q-option.wrong{border-color:var(--error);background:#FEF2F2;color:#991B1B}
+.q-option.revealed{border-color:var(--success);background:#ECFDF5;color:#065F46}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px}
+.q-nav button{
+  padding:10px 24px;border-radius:10px;
+  border:none;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:all 0.3s;
+}
+.q-nav .q-prev{background:#E5E7EB;color:var(--text)}
+.q-nav .q-prev:hover{background:#D1D5DB}
+.q-nav .q-next{background:var(--primary);color:#fff}
+.q-nav .q-next:hover{background:var(--primary-light)}
+.q-nav .q-submit{background:var(--gold);color:var(--primary-dark)}
+.q-nav .q-submit:hover{box-shadow:0 4px 16px rgba(212,160,23,0.4)}
+
+/* Quiz config */
+.quiz-config{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.quiz-config label{font-weight:600;font-size:0.9rem;display:block;margin-bottom:4px}
+.quiz-config select,.quiz-config input{
+  width:100%;padding:10px 14px;border-radius:10px;
+  border:2px solid #E5E7EB;font-family:inherit;font-size:0.9rem;
+  background:var(--card);
+}
+.quiz-start-btn{
+  grid-column:1/-1;
+  padding:14px;border-radius:12px;
+  background:var(--gold);color:var(--primary-dark);
+  border:none;font-weight:800;font-size:1.05rem;
+  cursor:pointer;font-family:inherit;
+  transition:all 0.3s;
+}
+.quiz-start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,0.3)}
+
+/* Tables */
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:var(--shadow);margin-bottom:20px}
+table{width:100%;border-collapse:collapse;background:var(--card)}
+th{background:var(--primary);color:#fff;padding:14px 16px;font-size:0.85rem;font-weight:700;text-align:start}
+td{padding:12px 16px;border-bottom:1px solid #F3F4F6;font-size:0.9rem}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#F9FAFB}
+
+/* Pricing */
+.pricing-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+.pricing-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:28px 20px;
+  box-shadow:var(--shadow);
+  text-align:center;
+  transition:all 0.3s;
+  position:relative;
+  width:100%;
+  max-width:320px;
+}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.pricing-card.featured{
+  border:2px solid var(--gold);
+  transform:scale(1.03);
+}
+.pricing-card.featured:hover{transform:scale(1.03) translateY(-4px)}
+.pricing-card .p-name{font-size:1.1rem;font-weight:700;margin-bottom:6px}
+.pricing-card .p-price{font-size:2rem;font-weight:900;color:var(--primary);margin-bottom:4px}
+.pricing-card .p-price span{font-size:0.9rem;font-weight:400;color:var(--text-muted)}
+.pricing-card .p-desc{color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;line-height:1.6}
+.pricing-card .p-cta{
+  display:inline-block;padding:12px 32px;border-radius:30px;
+  background:var(--primary);color:#fff;font-weight:700;
+  text-decoration:none;transition:all 0.3s;font-size:0.95rem;
+}
+.pricing-card .p-cta:hover{background:var(--primary-light);transform:translateY(-2px)}
+.pricing-card.featured .p-cta{background:var(--gold);color:var(--primary-dark)}
+
+/* CTA */
+#cta{
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  text-align:center;
+  color:#fff;
+}
+#cta h2{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;margin-bottom:12px}
+#cta p{font-size:1.05rem;opacity:0.85;margin-bottom:10px;max-width:500px;margin-left:auto;margin-right:auto}
+#cta .cta-buttons{margin-top:28px}
+
+/* Footer */
+footer{
+  background:var(--primary-dark);
+  color:rgba(255,255,255,0.6);
+  text-align:center;
+  padding:30px 20px;
+  font-size:0.85rem;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero-content{grid-template-columns:1fr;text-align:center}
+  .hero-left .desc{margin-left:auto;margin-right:auto}
+  .hero-buttons{justify-content:center}
+  .hero-stats{grid-template-columns:1fr 1fr;gap:12px}
+  .stat-card{padding:16px;font-size:1.2rem}
+  .demo-panel{padding:20px}
+  .quiz-config{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  section{padding:50px 16px}
+  .hero-content{padding:30px 16px}
+  .pricing-card.featured{transform:none}
+  .pricing-card.featured:hover{transform:translateY(-4px)}
+  .subject-demo-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+}
+
+/* Animations */
+.fade-in{opacity:0;transform:translateY(24px);transition:all 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ════════════ LANGUAGE BAR ════════════ -->
+<div class="lang-bar">
+  <div class="brand"><span style="color:var(--gold);font-weight:900;font-size:1.2rem">?????</span></div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="ar" onclick="switchLang('ar')">🇮🇶 العربية</button>
+    <button class="lang-btn" data-lang="ku" onclick="switchLang('ku')">🇰🇶 کوردی</button>
+    <button class="lang-btn" data-lang="en" onclick="switchLang('en')">🇬🇧 English</button>
+  </div>
+</div>
+
+<!-- ════════════ HERO ════════════ -->
+<header>
+  <div class="hero-content">
+    <div class="hero-left">
+      <h1><span class="gold" id="heroTitleAr">وزاري</span><br id="heroBr"><span id="heroTitleEn">Wizari</span></h1>
+      <div class="subtitle" id="heroSubtitle">الأسئلة الوزارية للصف السادس الإعدادي</div>
+      <p class="desc" id="heroDesc">
+        تصفّح الأسئلة الوزارية الحقيقية من السنوات السابقة — اختر المادة، اختر السنة، 
+        وستظهر أمامك الأسئلة كما كانت في الامتحان. مع اختبارات تفاعلية لتقوية معلوماتك 
+        وتتبع تقدمك.
+      </p>
+      <div class="hero-buttons">
+        <a href="#demo" class="btn btn-primary" id="heroBtn1">⚡ جرّب الأسئلة</a>
+        <a href="#subjects" class="btn btn-outline" id="heroBtn2">📚 المواد المتوفرة</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-illustration">
+        <div class="hero-stats">
+          <div class="stat-card">📚 <span id="heroStatSubjects">١٥</span><br><small id="heroStatSubjectsLabel">مادة دراسية</small></div>
+          <div class="stat-card">📅 <span id="heroStatYears">٢٠٢٠-٢٠٢٥</span><br><small id="heroStatYearsLabel">سنوات الامتحانات</small></div>
+          <div class="stat-card">🎯 <span id="heroStatStreams">٢</span><br><small id="heroStatStreamsLabel">مسار (علمي + أدبي)</small></div>
+          <div class="stat-card">🌐 <span id="heroStatLangs">٣</span><br><small id="heroStatLangsLabel">لغات</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════ DEMO ════════════ -->
+<section id="demo">
+  <div class="section-inner">
+    <h2 class="section-title" id="demoTitle">🖱️ جرّب الواجهة</h2>
+    <p class="section-subtitle" id="demoSubtitle">تفاعل مع النموذج — اختر مادة وسنة وشاهد الأسئلة الحقيقية</p>
+
+    <div class="demo-container">
+      <div class="demo-tabs">
+        <button class="demo-tab active" data-tab="browse" id="tabBrowse">🔍 تصفّح الأسئلة</button>
+        <button class="demo-tab" data-tab="quiz" id="tabQuiz">📝 وضع الاختبارات</button>
+      </div>
+
+      <!-- ── Browse Panel ── -->
+      <div class="demo-panel active" id="tab-browse">
+        <p style="color:var(--text-muted);margin-bottom:16px;font-size:0.9rem" id="browseHint">
+          <strong>الخطوة ١:</strong> اختر مادة &nbsp;|&nbsp; 
+          <strong>الخطوة ٢:</strong> اختر سنة &nbsp;|&nbsp; 
+          <strong>الخطوة ٣:</strong> أجب عن الأسئلة
+        </p>
+
+        <label style="font-weight:700;display:block;margin-bottom:8px" id="browseSubjLabel">📖 اختر المادة:</label>
+        <div class="subject-demo-grid" id="demoSubjects">
+          <div class="subject-demo-card" data-subject="math"><div class="s-icon">π</div><div class="s-name" data-ar="الرياضيات" data-ku="بیرکاری">الرياضيات</div><div class="s-name-en">Mathematics</div></div>
+          <div class="subject-demo-card" data-subject="physics"><div class="s-icon">⚛️</div><div class="s-name" data-ar="الفيزياء" data-ku="فیزیا">الفيزياء</div><div class="s-name-en">Physics</div></div>
+          <div class="subject-demo-card" data-subject="chemistry"><div class="s-icon">🧪</div><div class="s-name" data-ar="الكيمياء" data-ku="کیمیا">الكيمياء</div><div class="s-name-en">Chemistry</div></div>
+          <div class="subject-demo-card" data-subject="arabic"><div class="s-icon">📖</div><div class="s-name" data-ar="اللغة العربية" data-ku="زمانی عەرەبی">اللغة العربية</div><div class="s-name-en">Arabic</div></div>
+          <div class="subject-demo-card" data-subject="english"><div class="s-icon">🌍</div><div class="s-name" data-ar="اللغة الإنكليزية" data-ku="زمانی ئینگلیزی">اللغة الإنكليزية</div><div class="s-name-en">English</div></div>
+          <div class="subject-demo-card" data-subject="islamic"><div class="s-icon">🕌</div><div class="s-name" data-ar="التربية الإسلامية" data-ku="پەروەردەی ئیسلامي">التربية الإسلامية</div><div class="s-name-en">Islamic Education</div></div>
+        </div>
+
+        <div id="demoYearSection" style="display:none">
+          <label style="font-weight:700;display:block;margin:16px 0 8px" id="browseYearLabel">📅 اختر السنة:</label>
+          <div class="year-grid" id="demoYears"></div>
+          <div id="demoSessionSection" style="display:none">
+            <label style="font-weight:700;display:block;margin:16px 0 8px" id="browseSessionLabel">📋 اختر الدورة:</label>
+            <div class="session-select" id="demoSessions"></div>
+          </div>
+        </div>
+
+        <div id="demoQuestionArea" class="question-area" style="display:none">
+          <div class="q-meta">
+            <span id="qSubject"></span>
+            <span id="qYear"></span>
+          </div>
+          <div class="q-text" id="qText"></div>
+          <div class="q-options" id="qOptions"></div>
+          <div class="q-nav">
+            <button class="q-prev" id="qPrev">← <span id="qPrevLabel">السابق</span></button>
+            <span id="qCounter" style="font-weight:600;font-size:0.85rem;align-self:center"></span>
+            <button class="q-next" id="qNext"><span id="qNextLabel">التالي</span> →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Quiz Panel ── -->
+      <div class="demo-panel" id="tab-quiz">
+        <p style="color:var(--text-muted);margin-bottom:16px;font-size:0.9rem" id="quizHint">
+          أنشئ اختباراً مخصصاً من أسئلة سنوات متعددة — ركّز على نقاط ضعفك
+        </p>
+        <div class="quiz-config">
+          <div>
+            <label id="quizSubjLabel">المادة</label>
+            <select id="quizSubject">
+              <option value="math" data-ar="الرياضيات" data-ku="بیرکاری">الرياضيات</option>
+              <option value="physics" data-ar="الفيزياء" data-ku="فیزیا">الفيزياء</option>
+              <option value="chemistry" data-ar="الكيمياء" data-ku="کیمیا">الكيمياء</option>
+              <option value="arabic" data-ar="اللغة العربية" data-ku="زمانی عەرەبی">اللغة العربية</option>
+              <option value="english" data-ar="اللغة الإنكليزية" data-ku="زمانی ئینگلیزی">اللغة الإنكليزية</option>
+            </select>
+          </div>
+          <div>
+            <label id="quizCountLabel">عدد الأسئلة</label>
+            <select id="quizCount">
+              <option value="5" data-ar="٥ أسئلة" data-ku="٥ پرسیار">٥ أسئلة</option>
+              <option value="10" selected data-ar="١٠ أسئلة" data-ku="١٠ پرسیار">١٠ أسئلة</option>
+              <option value="15" data-ar="١٥ سؤال" data-ku="١٥ پرسیار">١٥ سؤال</option>
+              <option value="20" data-ar="٢٠ سؤال" data-ku="٢٠ پرسیار">٢٠ سؤال</option>
+            </select>
+          </div>
+          <div>
+            <label id="quizYearLabel">نطاق السنوات</label>
+            <select id="quizYearRange">
+              <option value="2020-2025" data-ar="٢٠٢٠ - ٢٠٢٥" data-ku="٢٠٢٠ - ٢٠٢٥">٢٠٢٠ - ٢٠٢٥</option>
+              <option value="2022-2025" data-ar="٢٠٢٢ - ٢٠٢٥" data-ku="٢٠٢٢ - ٢٠٢٥">٢٠٢٢ - ٢٠٢٥</option>
+              <option value="2023-2025" data-ar="٢٠٢٣ - ٢٠٢٥" data-ku="٢٠٢٣ - ٢٠٢٥">٢٠٢٣ - ٢٠٢٥</option>
+              <option value="2024-2025" data-ar="٢٠٢٤ - ٢٠٢٥" data-ku="٢٠٢٤ - ٢٠٢٥">٢٠٢٤ - ٢٠٢٥</option>
+            </select>
+          </div>
+          <div>
+            <label id="quizDiffLabel">الصعوبة</label>
+            <select id="quizDifficulty">
+              <option value="all" data-ar="جميع المستويات" data-ku="هەموو ئاستەکان">جميع المستويات</option>
+              <option value="easy" data-ar="سهل" data-ku="ئاسان">سهل</option>
+              <option value="medium" data-ar="متوسط" data-ku="ناوەند">متوسط</option>
+              <option value="hard" data-ar="صعب" data-ku="قورس">صعب</option>
+            </select>
+          </div>
+          <button class="quiz-start-btn" id="quizStartBtn">🚀 <span id="quizStartLabel">ابدأ الاختبار</span></button>
+        </div>
+
+        <div id="quizQuestionArea" style="display:none">
+          <div class="question-area" style="margin-top:0">
+            <div class="q-meta">
+              <span id="quizQSubject"></span>
+              <span id="quizQMeta"></span>
+            </div>
+            <div class="q-text" id="quizQText"></div>
+            <div class="q-options" id="quizQOptions"></div>
+            <div class="q-nav">
+              <button class="q-prev" id="quizPrev">← <span id="quizPrevLabel">السابق</span></button>
+              <span id="quizQCounter" style="font-weight:600;font-size:0.85rem;align-self:center"></span>
+              <button class="q-submit" id="quizSubmit" style="display:none">✅ <span id="quizSubmitLabel">إنهاء الاختبار</span></button>
+              <button class="q-next" id="quizNext"><span id="quizNextLabel">التالي</span> →</button>
+            </div>
+          </div>
+        </div>
+        <div id="quizResults" style="display:none;text-align:center;padding:30px">
+          <div style="font-size:48px;margin-bottom:12px" id="quizResultIcon">🎉</div>
+          <h3 style="color:var(--primary);margin-bottom:8px" id="quizResultTitle">أحسنت!</h3>
+          <p style="font-size:1.2rem" id="quizResultScore"></p>
+          <p style="color:var(--text-muted);margin-top:8px" id="quizResultDetail"></p>
+          <button class="q-prev" style="margin-top:20px;padding:10px 28px;border-radius:30px" id="quizRetryBtn">🔄 <span id="quizRetryLabel">اختبار جديد</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SUBJECTS TABLE ════════════ -->
+<section id="subjects" style="background:var(--bg)">
+  <div class="section-inner">
+    <h2 class="section-title" id="subjectsTitle">📋 المواد المتوفرة</h2>
+    <p class="section-subtitle" id="subjectsSubtitle">تغطية كاملة لجميع مواد الفرعين العلمي والأدبي — بالعربية والكردية</p>
+
+    <div class="demo-tabs" style="border-radius:12px;margin-bottom:20px;background:var(--primary);display:inline-flex;width:auto">
+      <button class="demo-tab active" style="padding:12px 28px" data-stream="scientific" id="streamSci">🧪 الفرع العلمي</button>
+      <button class="demo-tab" style="padding:12px 28px" data-stream="literary" id="streamLit">📖 الفرع الأدبي</button>
+    </div>
+
+    <div id="scientific-table" class="table-wrap">
+      <table>
+        <thead><tr><th id="thSubject" data-ar="المادة" data-ku="مادە">المادة</th><th id="thCount" data-ar="عدد الأسئلة/سنة" data-ku="ژمارەی پرسیار/ساڵ">عدد الأسئلة/سنة</th><th id="thChapters" data-ar="الفصول" data-ku="بابەتەکان">الفصول</th><th id="thTypes" data-ar="أنواع الأسئلة" data-ku="جۆری پرسیارەکان">أنواع الأسئلة</th></tr></thead>
+        <tbody>
+          <tr><td data-ar="الرياضيات" data-ku="بیرکاری">الرياضيات</td><td>٤٠</td><td data-ar="الجبر، الهندسة، التفاضل، الإحصاء" data-ku="جەبر، ئەندازە، جیاکاری، ئامار">الجبر، الهندسة، التفاضل، الإحصاء</td><td data-ar="اختياري + مسائل" data-ku="هەڵبژاردن + ڕاهێنان">اختياري + مسائل</td></tr>
+          <tr><td data-ar="الفيزياء" data-ku="فیزیا">الفيزياء</td><td>٣٠</td><td data-ar="الميكانيك، الكهرباء، البصريات، الحرارة، الفيزياء الحديثة" data-ku="میکانیك، کارەبا، ڕووناکی، گەرمی، فیزیای هاوچەرخ">الميكانيك، الكهرباء، البصريات، الحرارة، الحديثة</td><td data-ar="اختياري + مسائل + رسوم" data-ku="هەڵبژاردن + ڕاهێنان + وێنە">اختياري + مسائل + رسوم</td></tr>
+          <tr><td data-ar="الكيمياء" data-ku="کیمیا">الكيمياء</td><td>٣٠</td><td data-ar="الذرة، الروابط، التفاعلات، العضوية، التحليلية" data-ku="گەردیلە، پەیوەندییەکان، کارلێکەکان، ئۆرگانیک، شیکاری">الذرة، الروابط، التفاعلات، العضوية، التحليلية</td><td data-ar="اختياري + معادلات" data-ku="هەڵبژاردن + هاوکێشە">اختياري + معادلات</td></tr>
+          <tr><td data-ar="الأحياء" data-ku="زیندەوەرزانی">الأحياء</td><td>٣٠</td><td data-ar="الخلية، الوراثة، جسم الإنسان، النبات، البيئة" data-ku="خانە، بۆماوە، لەشی مرۆڤ، ڕوەک، ژینگە">الخلية، الوراثة، جسم الإنسان، النبات، البيئة</td><td data-ar="اختياري + رسوم + مقالي" data-ku="هەڵبژاردن + وێنە + وتار">اختياري + رسوم + مقالي</td></tr>
+          <tr><td data-ar="اللغة العربية" data-ku="زمانی عەرەبی">اللغة العربية</td><td>٢٥</td><td data-ar="النحو، الأدب، البلاغة، الإملاء، الإنشاء" data-ku="ڕێزمان، ئەدەب، ڕەوانبێژی، ڕێنووس، نووسین">النحو، الأدب، البلاغة، الإملاء، الإنشاء</td><td data-ar="اختياري + كتابة" data-ku="هەڵبژاردن + نووسین">اختياري + كتابة</td></tr>
+          <tr><td data-ar="اللغة الإنكليزية" data-ku="زمانی ئینگلیزی">اللغة الإنكليزية</td><td>٢٥</td><td data-ar="القواعد، القراءة، المفردات، الكتابة" data-ku="ڕێزمان، خوێندنەوە، وشە، نووسین">القواعد، القراءة، المفردات، الكتابة</td><td data-ar="اختياري + تعبير" data-ku="هەڵبژاردن + دەربڕین">اختياري + تعبير</td></tr>
+          <tr><td data-ar="التربية الإسلامية" data-ku="پەروەردەی ئیسلامی">التربية الإسلامية</td><td>٢٠</td><td data-ar="القرآن، الحديث، الفقه، العقيدة" data-ku="قورئان، حەدیس، فیقه، عەقیدە">القرآن، الحديث، الفقه، العقيدة</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+          <tr><td data-ar="اللغة الكردية" data-ku="زمانی کوردی">اللغة الكردية</td><td>٢٠</td><td data-ar="القواعد، الأدب، التعبير، القراءة" data-ku="ڕێزمان، ئەدەب، دەربڕین، خوێندنەوە">القواعد، الأدب، التعبير، القراءة</td><td data-ar="متنوع" data-ku="جۆراوجۆر">متنوع</td></tr>
+          <tr><td data-ar="الحاسوب" data-ku="کۆمپیوتەر">الحاسوب</td><td>١٥</td><td data-ar="برمجة، قواعد بيانات، شبكات، ذكاء اصطناعي" data-ku="برنامه‌سازی, بنکەی زانیاری، تۆڕ، زیرەکی دەستکرد">برمجة، قواعد بيانات، شبكات، ذكاء اصطناعي</td><td data-ar="اختياري" data-ku="هەڵبژاردن">اختياري</td></tr>
+          <tr><td data-ar="التربية الوطنية" data-ku="پەروەردەی نیشتمانی">التربية الوطنية</td><td>١٥</td><td data-ar="المواطنة، الحكومة، تاريخ العراق" data-ku="ڕەگەزپەرستی، حکومەت، مێژووی عێراق">المواطنة، الحكومة، تاريخ العراق</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="literary-table" class="table-wrap" style="display:none">
+      <table>
+        <thead><tr><th id="thSubject2" data-ar="المادة" data-ku="مادە">المادة</th><th id="thCount2" data-ar="عدد الأسئلة/سنة" data-ku="ژمارەی پرسیار/ساڵ">عدد الأسئلة/سنة</th><th id="thChapters2" data-ar="الفصول" data-ku="بابەتەکان">الفصول</th><th id="thTypes2" data-ar="أنواع الأسئلة" data-ku="جۆري پرسیارەکان">أنواع الأسئلة</th></tr></thead>
+        <tbody>
+          <tr><td data-ar="اللغة العربية" data-ku="زمانی عەرەبی">اللغة العربية</td><td>٢٥</td><td data-ar="النحو، الأدب، البلاغة، الإملاء، الإنشاء" data-ku="ڕێزمان، ئەدەب، ڕەوانبێژی، ڕێنووس، نووسین">النحو، الأدب، البلاغة، الإملاء، الإنشاء</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+          <tr><td data-ar="اللغة الإنكليزية" data-ku="زمانی ئینگلیزی">اللغة الإنكليزية</td><td>٢٥</td><td data-ar="القواعد، القراءة، المفردات، الكتابة" data-ku="ڕێزمان، خوێندنەوە، وشە، نووسین">القواعد، القراءة، المفردات، الكتابة</td><td data-ar="اختياري + تعبير" data-ku="هەڵبژاردن + دەربڕین">اختياري + تعبير</td></tr>
+          <tr><td data-ar="التربية الإسلامية" data-ku="پەروەردەی ئیسلامی">التربية الإسلامية</td><td>٢٠</td><td data-ar="القرآن، الحديث، الفقه، العقيدة" data-ku="قورئان، حەدیس، فیقه، عەقیدە">القرآن، الحديث، الفقه، العقيدة</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+          <tr><td data-ar="التاريخ" data-ku="مێژوو">التاريخ</td><td>٢٠</td><td data-ar="قديم، إسلامي، عراق حديث، عالم حديث" data-ku="کۆن، ئیسلامی، عێراقی هاوچەرخ، جیهانی هاوچەرخ">قديم، إسلامي، عراق حديث، عالم حديث</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+          <tr><td data-ar="الجغرافية" data-ku="جوگرافیا">الجغرافية</td><td>٢٠</td><td data-ar="طبيعية، بشرية، خرائط، جغرافيا العراق" data-ku="سروشتی، مرۆیی، نەخشە، جوگرافیای عێراق">طبيعية، بشرية، خرائط، جغرافيا العراق</td><td data-ar="اختياري + رسوم" data-ku="هەڵبژاردن + وێنە">اختياري + رسوم</td></tr>
+          <tr><td data-ar="الاقتصاد" data-ku="ئابووری">الاقتصاد</td><td>١٥</td><td data-ar="جزئي، كلي، تنمية" data-ku="بەشێکی، گشتی، گەشەپێدان">جزئي، كلي، تنمية</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+          <tr><td data-ar="علم الاجتماع" data-ku="کۆمەڵناسی">علم الاجتماع</td><td>١٥</td><td data-ar="النظرية، المجتمع العراقي، قضايا اجتماعية" data-ku="بیردۆز، کۆمەڵگەی عێراقی، کێشەی کۆمەڵایەتی">النظرية، المجتمع العراقي، قضايا اجتماعية</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+          <tr><td data-ar="الفلسفة وعلم النفس" data-ku="فەلسەفە و دەروونناسی">الفلسفة وعلم النفس</td><td>١٥</td><td data-ar="المنطق، الأخلاق، علم النفس" data-ku="لۆژیک، ڕەوشت، دەروونناسی">المنطق، الأخلاق، علم النفس</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+          <tr><td data-ar="اللغة الكردية" data-ku="زمانی کوردی">اللغة الكردية</td><td>٢٠</td><td data-ar="القواعد، الأدب، التعبير، القراءة" data-ku="ڕێزمان، ئەدەب، دەربڕین، خوێندنەوە">القواعد، الأدب، التعبير، القراءة</td><td data-ar="متنوع" data-ku="جۆراوجۆر">متنوع</td></tr>
+          <tr><td data-ar="التربية الوطنية" data-ku="پەروەردەی نیشتمانی">التربية الوطنية</td><td>١٥</td><td data-ar="المواطنة، الحكومة، تاريخ العراق" data-ku="ڕەگەزپەرستی، حکومەت، مێژووی عێراق">المواطنة، الحكومة، تاريخ العراق</td><td data-ar="اختياري + مقالي" data-ku="هەڵبژاردن + وتار">اختياري + مقالي</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:12px" id="subjectsNote">
+      * الأرقام تقريبية وتختلف من سنة إلى أخرى. المنهج الكردي يتضمن تعديلات في بعض المواد.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════ PRICING ════════════ -->
+<section style="background:#fff">
+  <div class="section-inner">
+    <h2 class="section-title" id="pricingTitle">💰 الأسعار</h2>
+    <p class="section-subtitle" id="pricingSubtitle">اكتشف باقاتنا المصممة لتلبية احتياجاتك الدراسية</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="p-name" id="pFreeName">مجاني</div>
+        <div class="p-price">0 <span id="pFreeCurr">دينار</span></div>
+        <div class="p-desc" id="pFreeDesc">تصفّح جميع الأسئلة الوزارية<br>مجاناً بالكامل</div>
+        <a href="#" class="p-cta" id="pFreeCTA">ابدأ الآن</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="p-name" id="pPremName">🌟 مميز شهري</div>
+        <div class="p-price">٥,٠٠٠ <span id="pPremCurr">دينار/شهر</span></div>
+        <div class="p-desc" id="pPremDesc">افتح ميزة الاختبارات (Trivia)<br>اختبر نفسك في جميع المواد</div>
+        <a href="#" class="p-cta" id="pPremCTA">اشترك الآن</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CTA ════════════ -->
+<section id="cta">
+  <div class="section-inner">
+    <h2 id="ctaTitle">🚀 انطلق في رحلة التفوق</h2>
+    <p id="ctaDesc">امتحانات وزارية حقيقية. آلاف الأسئلة. كل السنوات. كل المواد.</p>
+    <div class="cta-buttons">
+      <a href="#demo" class="btn btn-primary" style="font-size:1.1rem;padding:16px 40px">⚡ <span id="ctaBtn">جرّب الموقع الآن</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <p id="footer1">© ٢٠٢٦ وزاري — لأن مستقبلك يبدأ من امتحانك</p>
+  <p style="margin-top:6px;font-size:0.8rem" id="footer2">للصف السادس الإعدادي في العراق وكردستان</p>
+</footer>
+
+<!-- ════════════ JAVASCRIPT ════════════ -->
+<script>
+// ── Language Data ──
+const langData = {
+  ar: {
+    brandName:'وزاري',
+    heroTitleAr:'وزاري', heroTitleEn:'Wizari',
+    heroSubtitle:'الأسئلة الوزارية للصف السادس الإعدادي',
+    heroDesc:'تصفّح الأسئلة الوزارية الحقيقية من السنوات السابقة — اختر المادة، اختر السنة، وستظهر أمامك الأسئلة كما كانت في الامتحان. مع اختبارات تفاعلية لتقوية معلوماتك وتتبع تقدمك.',
+    heroBtn1:'⚡ جرّب الأسئلة', heroBtn2:'📚 المواد المتوفرة',
+    heroStatSubjects:'١٥', heroStatSubjectsLabel:'مادة دراسية',
+    heroStatYears:'٢٠٢٠-٢٠٢٥', heroStatYearsLabel:'سنوات الامتحانات',
+    heroStatStreams:'٢', heroStatStreamsLabel:'مسار (علمي + أدبي)',
+    heroStatLangs:'٣', heroStatLangsLabel:'لغات',
+    demoTitle:'🖱️ جرّب الأسئلة', demoSubtitle:'تفاعل مع النموذج — اختر مادة وسنة وشاهد الأسئلة الحقيقية',
+    tabBrowse:'🔍 تصفّح الأسئلة', tabQuiz:'📝 وضع الاختبارات',
+    browseHint:'<strong>الخطوة ١:</strong> اختر مادة &nbsp;|&nbsp; <strong>الخطوة ٢:</strong> اختر سنة &nbsp;|&nbsp; <strong>الخطوة ٣:</strong> أجب عن الأسئلة',
+    browseSubjLabel:'📖 اختر المادة:', browseYearLabel:'📅 اختر السنة:', browseSessionLabel:'📋 اختر الدورة:',
+    qPrevLabel:'السابق', qNextLabel:'التالي',
+    quizHint:'أنشئ اختباراً مخصصاً من أسئلة سنوات متعددة — ركّز على نقاط ضعفك',
+    quizSubjLabel:'المادة', quizCountLabel:'عدد الأسئلة', quizYearLabel:'نطاق السنوات', quizDiffLabel:'الصعوبة',
+    quizStartLabel:'ابدأ الاختبار',
+    quizPrevLabel:'السابق', quizNextLabel:'التالي', quizSubmitLabel:'إنهاء الاختبار', quizRetryLabel:'اختبار جديد',
+    subjectsTitle:'📋 المواد المتوفرة', subjectsSubtitle:'تغطية كاملة لجميع مواد الفرعين العلمي والأدبي — بالعربية والكردية',
+    streamSci:'🧪 الفرع العلمي', streamLit:'📖 الفرع الأدبي',
+    thSubject:'المادة', thCount:'عدد الأسئلة/سنة', thChapters:'الفصول', thTypes:'أنواع الأسئلة',
+    thSubject2:'المادة', thCount2:'عدد الأسئلة/سنة', thChapters2:'الفصول', thTypes2:'أنواع الأسئلة',
+    subjectsNote:'* الأرقام تقريبية وتختلف من سنة إلى أخرى. المنهج الكردي يتضمن تعديلات في بعض المواد.',
+    pricingTitle:'💰 الأسعار', pricingSubtitle:'اكتشف باقاتنا المصممة لتلبية احتياجاتك الدراسية',
+    pFreeName:'مجاني', pFreeCurr:'دينار', pFreeDesc:'تصفّح جميع الأسئلة الوزارية<br>مجاناً بالكامل', pFreeCTA:'ابدأ الآن',
+    pPremName:'🌟 مميز شهري', pPremCurr:'دينار/شهر', pPremDesc:'افتح ميزة الاختبارات (Trivia)<br>اختبر نفسك في جميع المواد', pPremCTA:'اشترك الآن',
+    ctaTitle:'🚀 انطلق في رحلة التفوق', ctaDesc:'امتحانات وزارية حقيقية. آلاف الأسئلة. كل السنوات. كل المواد.',
+    ctaBtn:'جرّب الموقع الآن',
+    footer1:'© ٢٠٢٦ وزاري — لأن مستقبلك يبدأ من امتحانك', footer2:'للصف السادس الإعدادي في العراق وكردستان',
+    sessions:{ordinary:'الدور الأول', remedial:'الدور الثاني', summer:'الدور الصيفي', private:'الخصوصي'},
+    quizResults:{
+      excellent:'ممتاز! أداء رائع 🎉',
+      good:'جيد جداً! استمر 💪',
+      need:'تحتاج إلى المزيد من التمارين 📚',
+      weak:'يبدو أنك بحاجة لمراجعة الأساسيات',
+      onTrack:'أنت على الطريق الصحيح — ركز على الأسئلة التي أخطأت فيها',
+      ready:'أنت مستعد جيداً! جرّب اختباراً بصعوبة أعلى',
+      score:'النتيجة',
+      of:'من'
+    }
+  },
+  ku: {
+    brandName:'وەزاری',
+    heroTitleAr:'وەزاری', heroTitleEn:'Wizari',
+    heroSubtitle:'ماڵپەڕی پرسیارە وەزارییەکانی پۆلی ١٢',
+    heroDesc:'پڕسیارە وەزارییە ڕاستەقینەکانی ساڵانی ڕابردوو ببینە — ماددەکە هەڵبژێرە، ساڵەکە هەڵبژێرە، پرسیارەکان وەک لە تاقیکردنەوەکەدا هاتوون دەردەکەون. لەگەڵ تاقیکردنەوەی کارلێکی بۆ بەهێزکردنی زانیارییەکانت.',
+    heroBtn1:'⚡ تاقیبکەوە', heroBtn2:'📚 ماددەکان',
+    heroStatSubjects:'١٥', heroStatSubjectsLabel:'بابەت',
+    heroStatYears:'٢٠٢٠-٢٠٢٥', heroStatYearsLabel:'ساڵانی تاقیکردنەوە',
+    heroStatStreams:'٢', heroStatStreamsLabel:'ڕێگا (زانستی + ئەدەبی)',
+    heroStatLangs:'٣', heroStatLangsLabel:'زمان',
+    demoTitle:'🖱️ تاقیبکەوە', demoSubtitle:'کارلێک بکە — ماددە و ساڵێک هەڵبژێرە و پرسیارە ڕاستەقینەکان ببینە',
+    tabBrowse:'🔍 گەڕان بە پرسیارەکان', tabQuiz:'📝 شێوازی تاقیکردنەوە',
+    browseHint:'<strong>هەنگاوی ١:</strong> ماددەکە هەڵبژێرە &nbsp;|&nbsp; <strong>هەنگاوی ٢:</strong> ساڵەکە هەڵبژێرە &nbsp;|&nbsp; <strong>هەنگاوی ٣:</strong> وەڵامی پرسیارەکان بدەرەوە',
+    browseSubjLabel:'📖 ماددەکە هەڵبژێرە:', browseYearLabel:'📅 ساڵەکە هەڵبژێرە:', browseSessionLabel:'📋 خولەکە هەڵبژێرە:',
+    qPrevLabel:'پێشتر', qNextLabel:'دواتر',
+    quizHint:'تاقیکردنەوەیەکی تایبەت لە پرسیارەکانی چەند ساڵی جیاواز دروست بکە — لەسەر خاڵە لاوازەکانت ڕابێت',
+    quizSubjLabel:'ماددە', quizCountLabel:'ژمارەی پرسیار', quizYearLabel:'ماوەی ساڵان', quizDiffLabel:'ئاست',
+    quizStartLabel:'دەستپێکردنی تاقیکردنەوە',
+    quizPrevLabel:'پێشتر', quizNextLabel:'دواتر', quizSubmitLabel:'تەواوکردنی تاقیکردنەوە', quizRetryLabel:'تاقیکردنەوەی نوێ',
+    subjectsTitle:'📋 ماددەکان', subjectsSubtitle:'داپۆشینی تەواوی ماددەکانی هەردوو بەشی زانستی و ئەدەبی — بە عەرەبی و کوردی',
+    streamSci:'🧪 بەشی زانستی', streamLit:'📖 بەشی ئەدەبی',
+    thSubject:'ماددە', thCount:'ژمارەی پرسیار/ساڵ', thChapters:'بابەتەکان', thTypes:'جۆری پرسیارەکان',
+    thSubject2:'ماددە', thCount2:'ژمارەی پرسیار/ساڵ', thChapters2:'بابەتەکان', thTypes2:'جۆری پرسیارەکان',
+    subjectsNote:'* ژمارەکان نزیکین و لە ساڵێکەوە بۆ ساڵێک دەگۆڕێن. ڕێبازی کوردی لە هەندێک ماددەدا جیاوازی هەیە.',
+    pricingTitle:'💰 نرخەکان', pricingSubtitle:'پلانەکانمان بۆ پێداویستییەکانی خوێندنت دیزاین کراون',
+    pFreeName:'بەخۆڕایی', pFreeCurr:'دینار', pFreeDesc:'گەڕان بە هەموو پرسیارە وەزارییەکان<br>بەخۆڕایی بە تەواوی', pFreeCTA:'دەستپێبکە',
+    pPremName:'🌟 تایبەتی مانگانە', pPremCurr:'دینار/مانگ', pPremDesc:'تایبەتمەندی تاقیکردنەوە (Trivia) بکەرەوە<br>خۆت تاقیبکەوە بۆ هەڵسەنگاندنی ئاستت', pPremCTA:'بەشداربە',
+    ctaTitle:'🚀 دەستپێبکە بە ڕێگای سەرکەوتن', ctaDesc:'تاقیکردنەوەی وەزاری ڕاستەقینە. هەزاران پرسیار. هەموو ساڵان. هەموو ماددەکان.',
+    ctaBtn:'ئێستا تاقیبکەوە',
+    footer1:'© ٢٠٢٦ وەزاری — چونکە داهاتووت لە تاقیکردنەوەکەتەوە دەست پێدەکات',
+    footer2:'بۆ پۆلی ١٢ - ئامادەیی لە عێراق و کوردستان',
+    sessions:{ordinary:'خولی یەکەم', remedial:'خولی دووەم', summer:'خولی هاوین', private:'تایبەت'},
+    quizResults:{
+      excellent:'زۆر باش! ئاستی بەرز 🎉',
+      good:'باشە! بەردەوامبە 💪',
+      need:'پێویستت بە ڕاهێنانی زیاترە 📚',
+      weak:'پێویستە بنەماکان بەسەربدەیتەوە',
+      onTrack:'لە ڕێگای ڕاستدایت — لەسەر پرسیارە هەڵەکانت ڕابێت',
+      ready:'ئامادەیت! تاقیکردنەوەیەکی قورستر تاقیبکەوە',
+      score:'ئەنجام',
+      of:'لە'
+    }
+  },
+  en: {
+    brandName:'Wizari',
+    heroTitleAr:'Wizari', heroTitleEn:'Wizari',
+    heroSubtitle:'Iraq & Kurdistan Ministry Exam Study Platform',
+    heroDesc:'Thousands of real past exam questions from Iraqi and Kurdish ministry exams — all in one place. Practice by subject, year, and session. Track your progress.',
+    heroBtn1:'🚀 Start Now', heroBtn2:'📚 Browse Subjects',
+    heroStatSubjects:'15', heroStatSubjectsLabel:'Subjects',
+    heroStatYears:'2020-2025', heroStatYearsLabel:'Exam Years',
+    heroStatStreams:'2', heroStatStreamsLabel:'Streams (Sci + Lit)',
+    heroStatLangs:'3', heroStatLangsLabel:'Languages',
+    demoTitle:'Try It Out', demoSubtitle:'No sign-up needed — pick a subject and try a real question right now',
+    tabBrowse:'📖 Browse Questions', tabQuiz:'🎯 Take a Quiz',
+    browseHint:'<strong>Step 1:</strong> Pick a subject &nbsp;|&nbsp; <strong>Step 2:</strong> Pick a year &nbsp;|&nbsp; <strong>Step 3:</strong> Start answering questions',
+    browseSubjLabel:'📚 Select subject:', browseYearLabel:'📅 Select year:', browseSessionLabel:'🎯 Select session:',
+    qPrevLabel:'⬅ Previous', qNextLabel:'Next ➡',
+    quizHint:'Customize your practice quiz below — questions pulled from real exams',
+    quizSubjLabel:'Subject', quizCountLabel:'Question Count', quizYearLabel:'Year Range', quizDiffLabel:'Difficulty',
+    quizStartLabel:'🚀 Start Quiz',
+    quizPrevLabel:'⬅ Previous', quizNextLabel:'Next ➡', quizSubmitLabel:'✅ Submit Quiz', quizRetryLabel:'🔄 Try Again',
+    subjectsTitle:'📋 Available Subjects', subjectsSubtitle:'Complete list of subjects for both Scientific and Literary streams — Arabic curriculum',
+    streamSci:'🔬 Scientific Stream', streamLit:'📖 Literary Stream',
+    thSubject:'Subject', thCount:'Questions/Year', thChapters:'Topics', thTypes:'Question Types',
+    thSubject2:'Subject', thCount2:'Questions/Year', thChapters2:'Topics', thTypes2:'Question Types',
+    subjectsNote:'* Numbers are approximate and vary by year. Kurdish curriculum has some differences in certain subjects.',
+    pricingTitle:'💰 Pricing', pricingSubtitle:'Discover our plans designed to meet your study needs',
+    pFreeName:'Free', pFreeCurr:'Dinar', pFreeDesc:'Browse all past ministry questions<br>Completely free', pFreeCTA:'Get Started',
+    pPremName:'🌟 Monthly Premium', pPremCurr:'Dinar/month', pPremDesc:'Unlock the Trivia feature<br>Test yourself and evaluate your level', pPremCTA:'Subscribe',
+    ctaTitle:'🚀 Start Your Success Journey', ctaDesc:'Real ministry exams. Thousands of questions. All years. All subjects.',
+    ctaBtn:'🚀 Try It Now',
+    footer1:'© 2026 Wizari — Because your future starts with your exam',
+    footer2:'For Grade 12 - Secondary School in Iraq & Kurdistan',
+    sessions:{ordinary:'First Session', remedial:'Second Session', summer:'Summer Session', private:'Private'},
+    quizResults:{
+      excellent:'Excellent! Great score 🎉',
+      good:'Good job! Keep going 💪',
+      need:'Need more practice 📚',
+      weak:'Review the basics and try again',
+      onTrack:'You are on the right track — review incorrect answers',
+      ready:'You are ready! Try a harder quiz',
+      score:'Score',
+      of:'of'
+    }
+  }
+};
+
+// ── Language State ──
+let currentLang = 'ar';
+document.documentElement.lang = 'ar';
+document.documentElement.dir = 'rtl';
+
+// Set initial lang from browser if English
+const browserLang = (navigator.language || '').slice(0,2);
+if (browserLang === 'en') switchLang('en');
+
+function switchLang(lang) {
+  currentLang = lang;
+  const d = langData[lang];
+  
+  // Update direction for LTR/RTL
+  document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+  document.documentElement.lang = lang;
+  
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  
+  // Update all elements with id-based translations
+  Object.keys(d).forEach(key => {
+    const el = document.getElementById(key);
+    if (el) el.innerHTML = d[key];
+  });
+  
+  // Remove the second headline and break line for English specifically
+  const heroTitleEnEl = document.getElementById('heroTitleEn');
+  const heroBrEl = document.getElementById('heroBr');
+  if (heroTitleEnEl) heroTitleEnEl.style.display = lang === 'en' ? 'none' : 'inline';
+  if (heroBrEl) heroBrEl.style.display = lang === 'en' ? 'none' : 'inline';
+  
+  // Update demo subject cards - use .s-name-en for English, data-ar/data-ku for others
+  document.querySelectorAll('.subject-demo-card').forEach(card=>{
+    const nameEl = card.querySelector('.s-name');
+    const nameEnEl = card.querySelector('.s-name-en');
+    if (lang === 'en' && nameEnEl) {
+      nameEl.textContent = nameEnEl.textContent;
+    } else if (nameEl && nameEl.dataset[lang]) {
+      nameEl.textContent = nameEl.dataset[lang];
+    }
+  });
+
+  // Update table cells - use English fallback from child text if no data-en
+  document.querySelectorAll('td[data-ar], th[data-ar]').forEach(el=>{
+    if(lang === 'en') {
+      // Show default text (already English for most table elements)
+    } else if(el.dataset[lang]) {
+      el.textContent = el.dataset[lang];
+    }
+  });
+
+  // Update select options - use English fallback
+  document.querySelectorAll('select option[data-ar]').forEach(el=>{
+    if(lang === 'en') {
+      const val = el.value;
+      const enNames = {'5':'5 Questions','10':'10 Questions','15':'15 Questions','20':'20 Questions','2020-2025':'2020 - 2025','2022-2025':'2022 - 2025','2023-2025':'2023 - 2025','2024-2025':'2024 - 2025','all':'All Difficulties','easy':'Easy','medium':'Medium','hard':'Hard'};
+      el.textContent = enNames[val] || val;
+    } else if(el.dataset[lang]) {
+      el.textContent = el.dataset[lang];
+    }
+  });
+
+  // Update quiz select labels
+  document.querySelectorAll('.quiz-config select').forEach(sel=>{
+    const label = sel.previousElementSibling;
+    if(label) label.textContent = d[sel.id+'Label'] || label.textContent;
+  });
+
+  // Re-render question display if browsing
+  if (currentQuestions.length > 0 && document.getElementById('demoQuestionArea').style.display !== 'none') {
+    renderQuestion();
+  }
+
+  // Update session labels in year chips if visible
+  document.querySelectorAll('.year-chip .sessions').forEach(el=>{
+    const text = el.textContent;
+    if (lang === 'ku') {
+      el.textContent = text.replace('الدور الأول', 'خولی یەکەم').replace('الدور الثاني', 'خولی دووەم').replace('First Session', 'خولی یەکەم').replace('Second Session', 'خولی دووەم');
+    } else if (lang === 'en') {
+      el.textContent = text.replace('الدور الأول', 'First Session').replace('الدور الثاني', 'Second Session').replace('خولی یەکەم', 'First Session').replace('خولی دووەم', 'Second Session');
+    } else {
+      el.textContent = text.replace('خولی یەکەم', 'الدور الأول').replace('خولی دووەم', 'الدور الثاني').replace('First Session', 'الدور الأول').replace('Second Session', 'الدور الثاني');
+    }
+  });
+}
+
+// ── Question Database ──
+const API_BASE = 'https://wizari-api.naseembusiness178.workers.dev';
+const API_ENABLED = true;
+
+const SUBJECT_CODE_MAP = {
+  'MATH':'math','PHYS':'physics','CHEM':'chemistry','BIO':'biology',
+  'ARAB':'arabic','ENG':'english','ISLAM':'islamic','KURD':'kurdish',
+  'CS':'cs','NAT_ED':'national_edu','HIST':'history','GEOG':'geography',
+  'ECON':'economics','SOC':'sociology','PHIL':'philosophy'
+};
+
+const questionsDB = {
+  math: {
+    nameAr: 'الرياضيات', nameKu: 'بیرکاری',
+    years: {
+      2024: {
+        ordinary: [
+          {num:1,text: 'إذا كان أ = {1, 2, 3} و ب = {2, 3, 4}، فإن أ ∩ ب =', marks:3,options:['{1, 2}','{2, 3}','{1, 4}','{3, 4}'],answer:1},
+          {num:2,text:'حل المعادلة: ٢س + ٥ = ١٣', marks:5,options:['س = ٣','س = ٤','س = ٥','س = ٦'],answer:1},
+          {num:3,text:'ما قيمة المشتقة الأولى للدالة د(س) = ٣س² + ٢س + ١ عند س = ٠؟', marks:5,options:['٠','١','٢','٣'],answer:2},
+          {num:4,text:'إذا كان قطر دائرة يساوي ١٠ سم، فما مساحتها؟', marks:4,options:['٢٥π سم²','١٠٠π سم²','٢٠π سم²','٥٠π سم²'],answer:0},
+        ],
+      }
+    }
+  },
+  physics: {
+    nameAr: 'الفيزياء', nameKu: 'فیزیا',
+    years: {
+      2024: {
+        ordinary: [
+          {num:1,text:'وحدة قياس القوة في النظام الدولي هي:', marks:3,options:['الجول','النيوتن','الواط','الكيلوغرام'],answer:1},
+          {num:2,text:'قانون نيوتن الثاني ينص على أن القوة =', marks:4,options:['الكتلة × السرعة','الكتلة × التسارع','الكتلة × الإزاحة','الكتلة × الزمن'],answer:1},
+        ]
+      }
+    }
+  },
+  chemistry: {
+    nameAr: 'الكيمياء', nameKu: 'کیمیا',
+    years: {
+      2024: {
+        ordinary: [
+          {num:1,text:'العدد الذري لعنصر الأكسجين هو:', marks:3,options:['٦','٨','١٠','١٦'],answer:1},
+          {num:2,text:'الرابطة بين ذرتين من الهيدروجين هي رابطة:', marks:4,options:['أيونية','تساهمية','فلزية','هيدروجينية'],answer:1},
+        ]
+      }
+    }
+  },
+  arabic: {
+    nameAr: 'اللغة العربية', nameKu: 'زمانی عەرەبی',
+    years: {
+      2024: {
+        ordinary: [
+          {num:1,text:'"جاء الطالبُ المجتهدُ" — كلمة "المجتهدُ" تعرب:', marks:3,options:['مبتدأ','خبر','نعت','مفعول به'],answer:2},
+          {num:2,text:'الفعل "يكتب" هو فعل:', marks:3,options:['ماضٍ','مضارع','أمر','جامد'],answer:1},
+        ]
+      }
+    }
+  },
+  english: {
+    nameAr: 'اللغة الإنكليزية', nameKu: 'زمانی ئینگلیزی',
+    years: {
+      2024: {
+        ordinary: [
+          {num:1,text:'She ___ to school every day.', marks:3,options:['go','goes','going','went'],answer:1},
+          {num:2,text:'The opposite of "hot" is:', marks:2,options:['warm','cool','cold','heat'],answer:2},
+        ]
+      }
+    }
+  },
+  islamic: {
+    nameAr: 'التربية الإسلامية', nameKu: 'پەروەردەی ئیسلامی',
+    years: {
+      2024: {
+        ordinary: [
+          {num:1,text:'عدد أركان الإسلام:', marks:3,options:['٣','٤','٥','٦'],answer:2},
+          {num:2,text:'أول ما نزل من القرآن الكريم:', marks:4,options:['سورة الفاتحة','سورة العلق','سورة الإخلاص','سورة الناس'],answer:1},
+        ]
+      }
+    }
+  }
+};
+
+async function apiFetch(path) {
+  try {
+    const res = await fetch(API_BASE + path);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } catch (e) {
+    console.warn('API fetch failed for', path, e.message);
+    return null;
+  }
+}
+
+let apiDataLoaded = false;
+let apiSubjects = [];
+let apiYears = [];
+let apiQuestionsCache = {};
+
+async function loadApiSubjects() {
+  const data = await apiFetch('/api/v1/subjects');
+  if (data && data.subjects) {
+    apiSubjects = data.subjects;
+    apiDataLoaded = true;
+  }
+}
+
+async function loadApiYears() {
+  const data = await apiFetch('/api/v1/exam-years?curriculum=arabic');
+  if (data && data.years) {
+    apiYears = data.years;
+  }
+}
+
+async function loadApiQuestions(subjectCode, yearId) {
+  const cacheKey = subjectCode + '/' + yearId;
+  if (apiQuestionsCache[cacheKey]) return apiQuestionsCache[cacheKey];
+  const data = await apiFetch('/api/v1/questions/subject/' + subjectCode + '/year/' + yearId);
+  if (data && data.questions && data.questions.length > 0) {
+    apiQuestionsCache[cacheKey] = data.questions;
+    return data.questions;
+  }
+  return null;
+}
+
+let currentSubject = null;
+let currentYear = null;
+let currentSession = null;
+let currentQuestions = [];
+let currentIndex = 0;
+let answeredState = {};
+let quizMode = false;
+let quizQuestions = [];
+let quizIndex = 0;
+let quizAnswers = {};
+let quizCorrectCount = 0;
+
+// ── Tab switching ──
+document.querySelectorAll('.demo-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    const parent = tab.parentElement;
+    parent.querySelectorAll('.demo-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    if(tab.dataset.tab){
+      document.querySelectorAll('.demo-panel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+    }
+    if(tab.dataset.stream){
+      document.querySelectorAll('[data-stream]').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('scientific-table').style.display = tab.dataset.stream === 'scientific' ? '' : 'none';
+      document.getElementById('literary-table').style.display = tab.dataset.stream === 'literary' ? '' : 'none';
+    }
+  });
+});
+
+// ── Subject selection ──
+document.querySelectorAll('.subject-demo-card').forEach(card=>{
+  card.addEventListener('click', async ()=>{
+    document.querySelectorAll('.subject-demo-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    currentSubject = card.dataset.subject;
+    document.getElementById('demoYearSection').style.display = 'block';
+    document.getElementById('demoQuestionArea').style.display = 'none';
+    document.getElementById('demoSessionSection').style.display = 'none';
+    
+    if (API_ENABLED) {
+      await Promise.all([loadApiSubjects(), loadApiYears()]);
+    }
+    renderYearSelection();
+  });
+});
+
+// ── Year selection ──
+function renderYearSelection(){
+  const yearGrid = document.getElementById('demoYears');
+  yearGrid.innerHTML = '';
+  
+  let years = [];
+  
+  if (apiYears.length > 0) {
+    years = [...new Set(apiYears.map(y => y.year))].sort((a,b)=>b-a);
+  }
+  
+  if (years.length === 0) {
+    const sub = questionsDB[currentSubject];
+    if (sub) years = Object.keys(sub.years).sort((a,b)=>b-a);
+  }
+  
+  if (years.length === 0) return;
+  
+  years.forEach(y=>{
+    const chip = document.createElement('div');
+    chip.className = 'year-chip';
+    
+    let sessions = [];
+    const apiYearSessions = apiYears.filter(ay => ay.year == y);
+    if (apiYearSessions.length > 0) {
+      sessions = [...new Set(apiYearSessions.map(ay => ay.session))];
+    } else {
+      const sub = questionsDB[currentSubject];
+      if (sub && sub.years[y]) sessions = Object.keys(sub.years[y]);
+    }
+    
+    const sessNames = langData[currentLang].sessions;
+    const label = sessions.map(s=>sessNames[s]||s).join(' + ');
+    chip.innerHTML = y + '<span class="sessions">' + label + '</span>';
+    
+    chip.addEventListener('click', ()=>{
+      document.querySelectorAll('.year-chip').forEach(c=>c.classList.remove('selected'));
+      chip.classList.add('selected');
+      currentYear = y;
+      renderSessionSelection(sessions, y);
+    });
+    yearGrid.appendChild(chip);
+  });
+}
+
+function renderSessionSelection(sessions, year){
+  const sessionDiv = document.getElementById('demoSessions');
+  sessionDiv.innerHTML = '';
+  
+  if (!sessions || sessions.length === 0) {
+    const sub = questionsDB[currentSubject];
+    if (sub && sub.years[year]) sessions = Object.keys(sub.years[year]);
+    if (!sessions || sessions.length === 0) return;
+  }
+  
+  document.getElementById('demoSessionSection').style.display = 'block';
+  const sessNames = langData[currentLang].sessions;
+  sessions.forEach(s=>{
+    const btn = document.createElement('button');
+    btn.className = 'session-btn';
+    btn.textContent = sessNames[s] || s;
+    btn.addEventListener('click', async ()=>{
+      document.querySelectorAll('.session-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      currentSession = s;
+      await loadQuestions(year, s);
+    });
+    sessionDiv.appendChild(btn);
+  });
+}
+
+async function loadQuestions(year, session){
+  if (API_ENABLED && apiSubjects.length > 0) {
+    const subjectKey = currentSubject;
+    const codeMap = { 'math':'MATH','physics':'PHYS','chemistry':'CHEM','biology':'BIO','arabic':'ARAB','english':'ENG','islamic':'ISLAM','kurdish':'KURD','cs':'CS','national_edu':'NAT_ED','history':'HIST','geography':'GEOG','economics':'ECON','sociology':'SOC','philosophy':'PHIL' };
+    const subjectCode = codeMap[subjectKey];
+    
+    if (subjectCode) {
+      const yearData = apiYears.find(ay => ay.year == year && ay.session == session);
+      if (yearData) {
+        const apiQs = await loadApiQuestions('s-' + subjectCode.toLowerCase(), yearData.id);
+        if (apiQs && apiQs.length > 0) {
+          currentQuestions = apiQs.map(q => ({
+            num: q.question_number,
+            text: q.question_text_ar,
+            marks: q.marks,
+            options: parseJsonField(q.options_ar) || [],
+            answer: letterToIndex(q.correct_answer),
+            _api: true
+          }));
+          currentIndex = 0;
+          answeredState = {};
+          document.getElementById('demoQuestionArea').style.display = 'block';
+          renderQuestion();
+          return;
+        }
+      }
+    }
+  }
+  
+  const sub = questionsDB[currentSubject];
+  if(!sub || !sub.years[year] || !sub.years[year][session]) {
+    document.getElementById('demoQuestionArea').style.display = 'none';
+    return;
+  }
+  currentQuestions = sub.years[year][session];
+  currentIndex = 0;
+  answeredState = {};
+  document.getElementById('demoQuestionArea').style.display = 'block';
+  renderQuestion();
+}
+
+function parseJsonField(val) {
+  if (!val) return null;
+  if (Array.isArray(val)) return val;
+  try { return JSON.parse(val); } catch(e) { return null; }
+}
+
+function letterToIndex(letter) {
+  const map = { 'A':0, 'B':1, 'C':2, 'D':3 };
+  return map[letter] !== undefined ? map[letter] : 0;
+}
+
+function renderQuestion(){
+  const q = currentQuestions[currentIndex];
+  if(!q) return;
+  const sub = questionsDB[currentSubject];
+  const name = currentLang === 'ar' ? sub.nameAr : sub.nameKu;
+  const sessNames = langData[currentLang].sessions;
+  document.getElementById('qSubject').textContent = name;
+  document.getElementById('qYear').textContent = currentYear + ' — ' + (sessNames[currentSession]||currentSession);
+  document.getElementById('qText').textContent = `س${q.num}) ${q.text}  (${q.marks} ${currentLang==='ar'?'درجات':'نمرە'})`;
+  document.getElementById('qCounter').textContent = `${currentIndex+1} / ${currentQuestions.length}`;
+
+  const optsDiv = document.getElementById('qOptions');
+  optsDiv.innerHTML = '';
+  const prefix = ['أ', 'ب', 'ج', 'د', 'هـ', 'و'];
+  q.options.forEach((opt,i)=>{
+    const el = document.createElement('div');
+    el.className = 'q-option';
+    el.textContent = prefix[i] + ') ' + opt;
+    const isAnswered = answeredState[currentIndex] !== undefined;
+    if(isAnswered){
+      if(i === q.answer) el.className += ' revealed';
+      if(i === answeredState[currentIndex] && i !== q.answer) el.className += ' wrong';
+    }
+    el.addEventListener('click', ()=>{
+      if(answeredState[currentIndex] === undefined){
+        answeredState[currentIndex] = i;
+        renderQuestion();
+      }
+    });
+    optsDiv.appendChild(el);
+  });
+
+  document.getElementById('qPrev').style.visibility = currentIndex > 0 ? 'visible' : 'hidden';
+  document.getElementById('qNext').innerHTML = currentIndex < currentQuestions.length-1 
+    ? (langData[currentLang].qNextLabel + ' →') 
+    : '✅ ' + (currentLang==='ar'?'تم':'تەواو');
+}
+
+document.getElementById('qPrev').addEventListener('click', ()=>{
+  if(currentIndex > 0){ currentIndex--; renderQuestion(); }
+});
+document.getElementById('qNext').addEventListener('click', ()=>{
+  if(currentIndex < currentQuestions.length-1){ currentIndex++; renderQuestion(); }
+});
+
+// ── Quiz ──
+document.getElementById('quizStartBtn').addEventListener('click', async function startQuiz(){
+  const subject = document.getElementById('quizSubject').value;
+  const count = parseInt(document.getElementById('quizCount').value);
+  const yearRange = document.getElementById('quizYearRange').value;
+  const [yMin, yMax] = yearRange.split('-').map(Number);
+
+  let pool = [];
+
+  if (API_ENABLED) {
+    const codeMap = { 'math':'MATH','physics':'PHYS','chemistry':'CHEM','biology':'BIO','arabic':'ARAB','english':'ENG','islamic':'ISLAM','kurdish':'KURD' };
+    const subjectCode = codeMap[subject];
+    
+    if (subjectCode) {
+      const apiSubj = apiSubjects.find(s => s.code === subjectCode);
+      if (apiSubj) {
+        const body = { subjectId: apiSubj.id, count: Math.min(count, 50), yearStart: yMin, yearEnd: yMax };
+        try {
+          const res = await fetch(API_BASE + '/api/v1/questions/quiz', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+          const data = await res.json();
+          if (data && data.questions && data.questions.length > 0) {
+            quizQuestions = data.questions.map(q => ({
+              num: q.question_number,
+              text: q.question_text_ar,
+              marks: q.marks,
+              options: parseJsonField(q.options_ar) || [],
+              answer: letterToIndex(q.correct_answer),
+              year: q.year,
+              subject: subject,
+              _api: true
+            })).slice(0, count);
+            
+            quizIndex = 0;
+            quizAnswers = {};
+            quizCorrectCount = 0;
+            document.getElementById('quizQuestionArea').style.display = 'block';
+            document.getElementById('quizResults').style.display = 'none';
+            renderQuizQuestion();
+            return;
+          }
+        } catch(e) { console.warn('Quiz API failed:', e); }
+      }
+    }
+  }
+  
+  const sub = questionsDB[subject];
+  if(!sub){ alert(currentLang==='ar'?'المادة غير متوفرة':'ئەم ماددەیە بەردەست نییە'); return; }
+  Object.keys(sub.years).forEach(y=>{
+    const year = parseInt(y);
+    if(year >= yMin && year <= yMax){
+      Object.values(sub.years[y]).forEach(sq=>{
+        sq.forEach(q=>pool.push({...q, year: y}));
+      });
+    }
+  });
+
+  if(pool.length === 0){ alert(currentLang==='ar'?'لا توجد أسئلة':'هیچ پرسیارێک نییە'); return; }
+  
+  for(let i=pool.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  quizQuestions = pool.slice(0, Math.min(count, pool.length));
+  quizIndex = 0;
+  quizAnswers = {};
+  quizCorrectCount = 0;
+
+  document.getElementById('quizQuestionArea').style.display = 'block';
+  document.getElementById('quizResults').style.display = 'none';
+  renderQuizQuestion();
+});
+
+function renderQuizQuestion(){
+  const q = quizQuestions[quizIndex];
+  if(!q) return;
+  const sub = questionsDB[quizQuestions[0]?.subject||'math'];
+  const name = currentLang === 'ar' ? sub.nameAr : sub.nameKu;
+  document.getElementById('quizQSubject').textContent = name;
+  document.getElementById('quizQMeta').textContent = (currentLang==='ar'?'سنة':'ساڵی') + ' ' + q.year;
+  document.getElementById('quizQText').textContent = `س${quizIndex+1}) ${q.text}`;
+  document.getElementById('quizQCounter').textContent = `${quizIndex+1} / ${quizQuestions.length}`;
+
+  const optsDiv = document.getElementById('quizQOptions');
+  optsDiv.innerHTML = '';
+  const prefix = ['أ', 'ب', 'ج', 'د'];
+  q.options.forEach((opt,i)=>{
+    const el = document.createElement('div');
+    el.className = 'q-option';
+    el.textContent = prefix[i] + ') ' + opt;
+    const ans = quizAnswers[quizIndex];
+    if(ans !== undefined){
+      if(i === q.answer) el.className += ' correct';
+      if(i === ans && i !== q.answer) el.className += ' wrong';
+    }
+    el.addEventListener('click', ()=>{
+      if(quizAnswers[quizIndex] === undefined){
+        quizAnswers[quizIndex] = i;
+        if(i === q.answer) quizCorrectCount++;
+        renderQuizQuestion();
+      }
+    });
+    optsDiv.appendChild(el);
+  });
+
+  document.getElementById('quizPrev').style.visibility = quizIndex > 0 ? 'visible' : 'hidden';
+  document.getElementById('quizNext').style.display = quizIndex < quizQuestions.length-1 ? 'inline-block' : 'none';
+  document.getElementById('quizSubmit').style.display = quizIndex === quizQuestions.length-1 ? 'inline-block' : 'none';
+}
+
+document.getElementById('quizPrev').addEventListener('click', ()=>{
+  if(quizIndex > 0){ quizIndex--; renderQuizQuestion(); }
+});
+document.getElementById('quizNext').addEventListener('click', ()=>{
+  if(quizIndex < quizQuestions.length-1){ quizIndex++; renderQuizQuestion(); }
+});
+document.getElementById('quizSubmit').addEventListener('click', showQuizResults);
+document.getElementById('quizRetryBtn').addEventListener('click', ()=>{
+  document.getElementById('quizResults').style.display = 'none';
+  document.getElementById('quizQuestionArea').style.display = 'none';
+});
+
+function showQuizResults(){
+  const total = quizQuestions.length;
+  const correct = quizCorrectCount;
+  const pct = Math.round(correct/total*100);
+  const d = langData[currentLang].quizResults;
+  const icon = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪';
+  const title = pct >= 80 ? d.excellent : pct >= 50 ? d.good : d.need;
+  
+  document.getElementById('quizResultIcon').textContent = icon;
+  document.getElementById('quizResultTitle').textContent = title;
+  document.getElementById('quizResultScore').textContent = `${d.score}: ${correct} / ${total} (${pct}%)`;
+  
+  let detail = pct < 50 ? d.weak : pct < 80 ? d.onTrack : d.ready;
+  document.getElementById('quizResultDetail').textContent = detail;
+
+  document.getElementById('quizQuestionArea').style.display = 'none';
+  document.getElementById('quizResults').style.display = 'block';
+}
+
+// ── Scroll animation ──
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// ── Init ──
+document.querySelector('.subject-demo-card')?.click();
+
+</script>
+</body>
+</html>
