@@ -820,8 +820,8 @@ function switchLang(lang) {
   // Remove the second headline and break line for English specifically
   const heroTitleEnEl = document.getElementById('heroTitleEn');
   const heroBrEl = document.getElementById('heroBr');
-  if (heroTitleEnEl) heroTitleEnEl.style.display = lang === 'en' ? 'none' : 'inline';
-  if (heroBrEl) heroBrEl.style.display = lang === 'en' ? 'none' : 'inline';
+  if (heroTitleEnEl) heroTitleEnEl.style.display = lang === 'en' ? 'inline' : 'none';
+  if (heroBrEl) heroBrEl.style.display = lang === 'en' ? 'inline' : 'none';
   
   // Update demo subject cards - use .s-name-en for English, data-ar/data-ku for others
   document.querySelectorAll('.subject-demo-card').forEach(card=>{
